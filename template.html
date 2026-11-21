@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{description}}">
+  <meta name="theme-color" content="#0a1626">
+  <title>{{name}} — {{role}}</title>
+  <style>{{css}}</style>
+  <script src="assets/globe-data.js" defer></script>
+  <script src="assets/globe.js" defer></script>
+</head>
+<body class="{{theme}}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="hero">
+    <div class="stage">
+      <canvas class="globe-canvas" role="img" aria-label="Illustration of the Earth. As the page scrolls the globe turns from the Middle East to Africa, a satellite records reflected sunlight along a swath, the weather radar stations over Western Europe light up, and flocks of birds fly south along autumn migration routes to Africa.">The Earth with a satellite swath, a weather radar network over Europe and bird migration routes to Africa.</canvas>
+      <nav class="topnav" aria-label="Main navigation"><a href="#about">About</a><a href="#research">Research</a><a href="#work">Selected work</a><a href="#connect">Contact</a></nav>
+      <div class="hero-copy">
+        <h1 id="name">{{name}}</h1>
+        <p class="tagline">{{title}}</p>
+        <div class="who">
+          <img src="{{portrait}}" alt="Portrait of {{name}}" width="853" height="853" fetchpriority="high">
+          <p><strong>{{role}}</strong>{{affiliation}}</p>
+        </div>
+        <p class="actions"><a class="btn primary" href="{{scholar}}">Google Scholar</a><a class="btn" href="{{github}}">GitHub</a><a class="btn" href="#research">Research</a></p>
+      </div>
+      <p class="legend"><span><i class="k-swath"></i>Reflected sunlight, measured by satellite</span><small>Schematic illustration. Coastlines: Natural Earth.</small></p>
+      <p class="cue" aria-hidden="true">Scroll to follow the birds south <span>↓</span></p>
+      <span class="progress" aria-hidden="true"></span>
+    </div>
+  </header>
+  <main id="main">
+    <section id="about" class="wrap split"><h2>About</h2><div class="prose">{{about}}</div></section>
+    <section id="research" class="wrap"><h2>Research</h2><div class="cards">{{research}}</div></section>
+    <section id="work" class="wrap split"><h2>Selected work</h2><div class="papers">{{work}}</div></section>
+    <div class="night">
+      <section id="connect" class="wrap split"><h2>Get in touch</h2><div class="prose">{{connect}}</div></section>
+    </div>
+  </main>
+  <footer class="night"><div class="wrap foot"><span>{{name}} · {{affiliation}}</span><span>{{footer}} · <a href="{{photoSource}}">{{photoCredit}}</a> · Design by {{designer}}</span></div></footer>
+</body>
+</html>

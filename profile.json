@@ -1,0 +1,15 @@
+{
+  "name": "Fiona Lippert",
+  "initials": "FL",
+  "role": "Postdoctoral researcher",
+  "affiliation": "SRON Space Research Organisation Netherlands",
+  "description": "Fiona Lippert develops machine learning for Earth observation at SRON, after a PhD on forecasting bird migration from weather radar.",
+  "theme": "earth",
+  "portrait": "assets/portrait.jpg",
+  "photoCredit": "Portrait via AI for Good",
+  "photoSource": "https://aiforgood.itu.int/speaker/fiona-lippert/",
+  "scholar": "https://scholar.google.com/citations?user=YOqyWTwAAAAJ",
+  "github": "https://github.com/FionaLippert",
+  "footer": "Earth observation · Bird migration · Machine learning",
+  "designer": "Casper van Elteren"
+}

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fiona Lippert develops machine learning for Earth observation at SRON, after a PhD on forecasting bird migration from weather radar.">
+  <meta name="theme-color" content="#0a1626">
+  <title>Fiona Lippert — Postdoctoral researcher</title>
+  <style>/* Fiona Lippert — Earth observation: a scroll-driven globe with a satellite swath,
+   a weather-radar network and migrating birds (assets/globe.js).
+   Fonts are bundled in assets/fonts; research icons live in assets/icons. */
+@font-face { font-family: "Newsreader"; src: url("assets/fonts/newsreader.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Newsreader"; src: url("assets/fonts/newsreader-italic.woff2") format("woff2"); font-weight: 200 800; font-style: italic; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("assets/fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+:root {
+  --night: #0a1626;
+  --night-2: #12284a;
+  --light: #eef3f8;
+  --mist: #b9c8d9;
+  --dim: #8fa3bb;
+  --paper: #f5f7f8;
+  --tint: #e9f0f6;
+  --ink: #10213a;
+  --body: #2a3a50;
+  --muted: #5a6a80;
+  --line: #dde4ea;
+  --amber: #f2b350;
+  --amber-dark: #b0640e;
+  --teal: #1f6f80;
+  --cyan: #6fd3e0;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
+  font-synthesis: none;
+  color: var(--body);
+  background: var(--night); /* what shows when the page is pulled past either end */
+  line-height: 1.6;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); }
+p, h1, h2, h3, figure { margin-top: 0; }
+h1, h2, h3 { text-wrap: balance; color: var(--ink); }
+a { color: inherit; text-decoration-color: var(--amber-dark); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+a:hover { color: var(--amber-dark); }
+a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+.wrap { width: min(1120px, calc(100% - 80px)); margin-inline: auto; }
+.skip-link { position: absolute; left: 16px; top: -100px; padding: 10px 14px; background: var(--amber); color: var(--night); z-index: 10; }
+.skip-link:focus { top: 12px; }
+
+/* ---------- Hero: a pinned stage. While it is pinned, scrolling turns the globe
+   and moves the birds (assets/globe.js). Without the script it is one screen high. ---------- */
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; color: var(--light); background: var(--night); }
+.globe-scroll .hero { height: 260vh; height: 260svh; }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(85vmax 85vmax at 82% 78%, var(--night-2) 0%, var(--night) 62%); }
+.globe-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, #0a1626f2 0%, #0a1626d9 26%, #0a162670 40%, #0a162600 54%); }
+.topnav, .hero-copy, .legend, .cue, .progress { position: relative; z-index: 1; }
+.topnav { display: flex; justify-content: flex-end; gap: 30px; padding: 26px 5vw 0; font-size: .95rem; font-weight: 500; }
+.topnav a { color: var(--mist); text-decoration: none; text-shadow: 0 1px 8px #0a1626; }
+.topnav a:hover { color: var(--light); }
+.hero-copy { margin-block: auto; padding: 0 0 7vh 7vw; max-width: min(660px, 50vw); }
+.hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(3.2rem, 6.4vw, 6.6rem); line-height: .95; letter-spacing: -.025em; color: var(--light); margin-bottom: .3em; }
+.tagline { font-size: clamp(1.12rem, 1.55vw, 1.42rem); line-height: 1.45; color: var(--mist); max-width: 30ch; margin-bottom: 34px; }
+.who { display: flex; align-items: center; gap: 18px; margin-bottom: 34px; }
+.who img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; box-shadow: 0 0 0 2px #ffffff26; }
+.who p { margin: 0; font-size: .98rem; line-height: 1.45; color: var(--dim); }
+.who strong { display: block; font-weight: 600; color: var(--light); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.btn { display: inline-block; padding: .62em 1.2em; border: 1px solid #ffffff3d; border-radius: 999px; font-size: .95rem; font-weight: 500; color: var(--light); text-decoration: none; background: #0a162699; }
+.btn:hover { background: #ffffff14; color: var(--light); }
+.btn.primary { background: var(--light); border-color: var(--light); color: var(--night); }
+.btn.primary:hover { background: #fff; color: var(--night); }
+
+.legend { position: absolute; left: 7vw; bottom: 4.5vh; margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; max-width: 46vw; font-size: .84rem; color: var(--mist); }
+.legend span { display: inline-flex; align-items: center; gap: 9px; }
+.k-swath { display: inline-block; width: 20px; height: 8px; background: linear-gradient(90deg, #721f81 0 25%, #b73779 0 50%, #f1605d 0 75%, #feb078 0); }
+.legend small { flex-basis: 100%; font-size: .74rem; color: var(--dim); }
+.cue { display: none; position: absolute; right: 5vw; bottom: 4.5vh; margin: 0; font-size: .88rem; font-weight: 500; color: var(--light); text-shadow: 0 1px 8px #0a1626; opacity: calc(1 - var(--p, 0) * 12); }
+.cue span { display: inline-block; margin-left: 6px; animation: nudge 1.8s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(4px); } }
+.progress { display: none; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; transform: scaleX(var(--p, 0)); transform-origin: 0 50%; background: var(--amber); opacity: .8; }
+.globe-scroll .cue, .globe-scroll .progress { display: block; }
+
+/* ---------- Sections ---------- */
+section { scroll-margin-top: 24px; }
+main > section { padding-block: 104px; }
+main > section + section { border-top: 1px solid var(--line); }
+.split { display: grid; grid-template-columns: 230px 1fr; column-gap: 56px; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height: 1.05; letter-spacing: -.015em; margin-bottom: 0; }
+.prose { font-size: 1.14rem; line-height: 1.7; max-width: 38em; }
+.prose p:last-child { margin-bottom: 0; }
+#about .prose p:first-child { font-family: var(--serif); font-size: 1.62rem; line-height: 1.4; letter-spacing: -.005em; color: var(--ink); margin-bottom: 1.1em; }
+
+#research h2 { margin-bottom: 44px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; }
+.cards article { padding: 30px 30px 34px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.cards article::before { content: ""; display: block; width: 64px; height: 64px; margin-bottom: 24px; border-radius: 16px;
+  background: var(--tint) url("assets/icons/satellite.svg") center / 46px no-repeat; }
+.cards article:nth-child(3n+2)::before { background-image: url("assets/icons/radar.svg"); }
+.cards article:nth-child(3n)::before { background-image: url("assets/icons/cells.svg"); }
+.cards .number, .papers .number { display: none; }
+.cards h3 { font-size: 1.26rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; margin-bottom: 10px; }
+.cards p { margin: 0; font-size: 1.02rem; line-height: 1.6; color: var(--muted); }
+
+.papers article + article { margin-top: 44px; padding-top: 44px; border-top: 1px solid var(--line); }
+.papers article > div { display: flex; flex-direction: column; }
+.papers h3 { order: 2; font-family: var(--serif); font-weight: 400; font-size: 1.6rem; line-height: 1.22; letter-spacing: -.01em; margin-bottom: 12px; max-width: 30em; }
+.papers p { order: 3; margin: 0; font-size: 1.05rem; line-height: 1.65; max-width: 40em; }
+.papers p:first-of-type { order: 1; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+
+.night { background: var(--night); color: var(--mist); }
+.night h2 { color: var(--light); }
+.night a { color: var(--light); text-decoration-color: var(--amber); }
+.night a:hover { color: var(--amber); }
+#connect { padding-block: 100px 88px; }
+#connect .prose { font-family: var(--serif); font-size: 1.75rem; line-height: 1.4; color: var(--light); }
+.foot { display: flex; justify-content: space-between; gap: 24px; padding-block: 24px 32px; border-top: 1px solid #ffffff1f; font-size: .84rem; color: var(--dim); }
+
+@media (max-width: 900px) {
+  .wrap { width: calc(100% - 48px); }
+  .topnav { justify-content: flex-start; flex-wrap: wrap; gap: 8px 22px; padding: 20px 24px 0; }
+  .stage::after { background: linear-gradient(180deg, #0a1626f5 0%, #0a1626dd 44%, #0a162600 64%, #0a162600 82%, #0a1626e0 100%); }
+  .hero-copy { margin: 0; padding: 30px 24px 0; max-width: none; }
+  .hero h1 { margin-bottom: .25em; }
+  .tagline { margin-bottom: 22px; }
+  .who { margin-bottom: 22px; }
+  .who img { width: 60px; height: 60px; }
+  .actions .btn:nth-child(3) { display: none; }
+  .legend { left: 24px; right: 24px; bottom: 18px; max-width: none; gap: 4px 18px; font-size: .76rem; }
+  .legend small { display: none; }
+  .globe-scroll .cue { display: none; }
+  main > section { padding-block: 64px; }
+  .split { grid-template-columns: 1fr; row-gap: 22px; }
+  h2 { font-size: 2.05rem; }
+  .prose { font-size: 1.08rem; }
+  #about .prose p:first-child { font-size: 1.38rem; }
+  #research h2 { margin-bottom: 28px; }
+  .papers h3 { font-size: 1.4rem; }
+  #connect { padding-block: 64px; }
+  #connect .prose { font-size: 1.42rem; }
+  .foot { flex-direction: column; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .cue span { animation: none; } }
+@media print {
+  .hero, .stage, .night { background: none; color: #000; }
+  .hero h1, .night h2, #connect .prose, .who strong { color: #000; }
+  .topnav, .actions, .globe-canvas, .legend, .cue, .progress, .skip-link { display: none; }
+  .hero, .globe-scroll .hero, .stage { height: auto; min-height: 0; position: static; }
+  .stage::after { display: none; }
+  .hero-copy { max-width: none; padding: 0; }
+  main > section { padding-block: 24px; }
+  article { break-inside: avoid; }
+}
+</style>
+  <script src="assets/globe-data.js" defer></script>
+  <script src="assets/globe.js" defer></script>
+</head>
+<body class="earth">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="hero">
+    <div class="stage">
+      <canvas class="globe-canvas" role="img" aria-label="Illustration of the Earth. As the page scrolls the globe turns from the Middle East to Africa, a satellite records reflected sunlight along a swath, the weather radar stations over Western Europe light up, and flocks of birds fly south along autumn migration routes to Africa.">The Earth with a satellite swath, a weather radar network over Europe and bird migration routes to Africa.</canvas>
+      <nav class="topnav" aria-label="Main navigation"><a href="#about">About</a><a href="#research">Research</a><a href="#work">Selected work</a><a href="#connect">Contact</a></nav>
+      <div class="hero-copy">
+        <h1 id="name">Fiona Lippert</h1>
+        <p class="tagline">Machine learning for observing the Earth, from greenhouse gases measured by satellites to bird migration seen by weather radar.</p>
+        <div class="who">
+          <img src="assets/portrait.jpg" alt="Portrait of Fiona Lippert" width="853" height="853" fetchpriority="high">
+          <p><strong>Postdoctoral researcher</strong>SRON Space Research Organisation Netherlands</p>
+        </div>
+        <p class="actions"><a class="btn primary" href="https://scholar.google.com/citations?user=YOqyWTwAAAAJ">Google Scholar</a><a class="btn" href="https://github.com/FionaLippert">GitHub</a><a class="btn" href="#research">Research</a></p>
+      </div>
+      <p class="legend"><span><i class="k-swath"></i>Reflected sunlight, measured by satellite</span><small>Schematic illustration. Coastlines: Natural Earth.</small></p>
+      <p class="cue" aria-hidden="true">Scroll to follow the birds south <span>↓</span></p>
+      <span class="progress" aria-hidden="true"></span>
+    </div>
+  </header>
+  <main id="main">
+    <section id="about" class="wrap split"><h2>About</h2><div class="prose"><p>Fiona Lippert is a postdoctoral researcher at SRON Space Research Organisation Netherlands. She develops machine learning methods that speed up the retrieval of greenhouse gas concentrations from satellite observations.</p>
+<p>She completed her PhD in AI for Science at the University of Amsterdam in 2025. Her thesis combined ideas from fluid dynamics with deep learning to forecast and interpret nocturnal bird migration across Europe from weather radar data.</p>
+<p>Her research sits where data-driven and mechanistic modelling meet: hybrid and surrogate models, probabilistic inference and explainable AI. Outside work she bakes, hikes and climbs.</p></div></section>
+    <section id="research" class="wrap"><h2>Research</h2><div class="cards"><article><span class="number" aria-hidden="true">01</span><div><h3>Greenhouse gases from space</h3>
+<p>Machine learning methods that make retrievals of greenhouse gas concentrations from satellite observations faster.</p></div></article>
+<article><span class="number" aria-hidden="true">02</span><div><h3>Bird migration from weather radar</h3>
+<p>Monitoring and forecasting nocturnal bird migration across Europe from networks of weather radars, and reconstructing fine-scale flight patterns from radar measurements.</p></div></article>
+<article><span class="number" aria-hidden="true">03</span><div><h3>Process-guided machine learning</h3>
+<p>Hybrid models that build a mechanistic description of a process into neural networks, so predictions stay physically consistent and remain interpretable.</p></div></article></div></section>
+    <section id="work" class="wrap split"><h2>Selected work</h2><div class="papers"><article><span class="number" aria-hidden="true">01</span><div><h3>From weather radars to bird migration fluxes: process-guided machine learning for spatio-temporal forecasting and inference</h3>
+<p>PhD thesis, University of Amsterdam · 2025</p>
+<p>Hybrid models that combine fluid-dynamics principles with deep learning to forecast continental-scale migration, and methods to reconstruct fine-scale movement from radar. <a href="https://www.uva.nl/en/content/events/2025/06/from-weather-radars-to-bird-migration-fluxes-process-guided-machine-learning-for-spatio-temporal-forecasting-and-inference.html">Defence announcement<span aria-hidden="true"> ↗</span></a>.</p></div></article>
+<article><span class="number" aria-hidden="true">02</span><div><h3>Towards detailed and interpretable hybrid modeling of continental-scale bird migration</h3>
+<p>ICML AI for Science workshop · 2024</p>
+<p>An extended hybrid model that forecasts migration on arbitrary grids and at locations without radar coverage. <a href="https://openreview.net/forum?id=oAmxqO1nRy">Read the paper<span aria-hidden="true"> ↗</span></a>.</p></div></article>
+<article><span class="number" aria-hidden="true">03</span><div><h3>Learning to predict spatiotemporal movement dynamics from weather radar networks</h3>
+<p>Methods in Ecology and Evolution · 2022</p>
+<p>Introduces FluxRGNN, a recurrent graph neural network built on a mechanistic description of movement, used for 72-hour forecasts of bird migration. <a href="https://doi.org/10.1111/2041-210X.14007">Read the paper<span aria-hidden="true"> ↗</span></a> or see the <a href="https://github.com/FionaLippert">code<span aria-hidden="true"> ↗</span></a>.</p></div></article></div></section>
+    <div class="night">
+      <section id="connect" class="wrap split"><h2>Get in touch</h2><div class="prose"><p>Find Fiona’s publications on <a href="https://scholar.google.com/citations?user=YOqyWTwAAAAJ">Google Scholar<span aria-hidden="true"> ↗</span></a> and her code on <a href="https://github.com/FionaLippert">GitHub<span aria-hidden="true"> ↗</span></a>.</p></div></section>
+    </div>
+  </main>
+  <footer class="night"><div class="wrap foot"><span>Fiona Lippert · SRON Space Research Organisation Netherlands</span><span>Earth observation · Bird migration · Machine learning · <a href="https://aiforgood.itu.int/speaker/fiona-lippert/">Portrait via AI for Good</a> · Design by Casper van Elteren</span></div></footer>
+</body>
+</html>
