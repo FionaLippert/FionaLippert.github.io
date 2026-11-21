@@ -94,16 +94,16 @@ h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height
 .prose p:last-child { margin-bottom: 0; }
 #about .prose p:first-child { font-family: var(--serif); font-size: 1.62rem; line-height: 1.4; letter-spacing: -.005em; color: var(--ink); margin-bottom: 1.1em; }
 
-#research h2 { margin-bottom: 44px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; }
-.cards article { padding: 30px 30px 34px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
-.cards article::before { content: ""; display: block; width: 64px; height: 64px; margin-bottom: 24px; border-radius: 16px;
-  background: var(--tint) url("assets/icons/satellite.svg") center / 46px no-repeat; }
+/* research: each interest is a row anchored by a large icon tile */
+.cards { display: grid; gap: 18px; }
+.cards article { display: grid; grid-template-columns: 112px 1fr; align-items: center; column-gap: 32px; padding: 26px 34px 26px 26px; background: #fff; border: 1px solid var(--line); border-radius: 22px; }
+.cards article::before { content: ""; width: 112px; height: 112px; border-radius: 24px;
+  background: var(--tint) url("assets/icons/satellite.svg") center / 84px no-repeat; }
 .cards article:nth-child(3n+2)::before { background-image: url("assets/icons/radar.svg"); }
 .cards article:nth-child(3n)::before { background-image: url("assets/icons/cells.svg"); }
 .cards .number, .papers .number { display: none; }
-.cards h3 { font-size: 1.26rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; margin-bottom: 10px; }
-.cards p { margin: 0; font-size: 1.02rem; line-height: 1.6; color: var(--muted); }
+.cards h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; margin-bottom: 8px; }
+.cards p { margin: 0; font-size: 1.04rem; line-height: 1.6; color: var(--muted); max-width: 36em; }
 
 .papers article + article { margin-top: 44px; padding-top: 44px; border-top: 1px solid var(--line); }
 .papers article > div { display: flex; flex-direction: column; }
@@ -135,7 +135,12 @@ h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height
   h2 { font-size: 2.05rem; }
   .prose { font-size: 1.08rem; }
   #about .prose p:first-child { font-size: 1.38rem; }
-  #research h2 { margin-bottom: 28px; }
+  /* phones: icon and title side by side, the description full width below */
+  .cards article { grid-template-columns: 68px 1fr; align-items: center; column-gap: 16px; padding: 18px 20px 22px 18px; border-radius: 18px; }
+  .cards article::before { width: 68px; height: 68px; border-radius: 18px; background-size: 52px; }
+  .cards article > div { display: contents; }
+  .cards h3 { margin: 0; }
+  .cards p { grid-column: 1 / -1; margin-top: 14px; }
   .papers h3 { font-size: 1.4rem; }
   #connect { padding-block: 64px; }
   #connect .prose { font-size: 1.42rem; }
