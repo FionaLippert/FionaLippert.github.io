@@ -45,6 +45,13 @@ h1, h2, h3 { text-wrap: balance; color: var(--ink); }
 a { color: inherit; text-decoration-color: var(--amber-dark); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
 a:hover { color: var(--amber-dark); }
 a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+/* drawn arrows (iPhones show the arrow characters as colour emoji); they take the text colour */
+.nowrap { white-space: nowrap; }
+.ext, .down { display: inline-block; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+.ext { width: .6em; height: .6em; margin-left: .24em; vertical-align: .02em;
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9 9 3M4.2 3H9v4.8'/%3E%3C/svg%3E"); }
+.down { width: .8em; height: .8em; vertical-align: -.08em;
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 1.5v9M2.5 7 6 10.5 9.5 7'/%3E%3C/svg%3E"); }
 .wrap { width: min(1120px, calc(100% - 80px)); margin-inline: auto; }
 .skip-link { position: absolute; left: 16px; top: -100px; padding: 10px 14px; background: var(--amber); color: var(--night); z-index: 10; }
 .skip-link:focus { top: 12px; }
@@ -173,7 +180,7 @@ h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height
         <p class="actions"><a class="btn primary" href="https://scholar.google.com/citations?user=YOqyWTwAAAAJ">Google Scholar</a><a class="btn" href="https://github.com/FionaLippert">GitHub</a><a class="btn" href="#research">Research</a></p>
       </div>
       <p class="legend"><span><i class="k-swath"></i>Reflected sunlight, measured by satellite</span><small>Schematic illustration. Coastlines: Natural Earth.</small></p>
-      <p class="cue" aria-hidden="true">Scroll to follow the birds south <span>↓</span></p>
+      <p class="cue" aria-hidden="true">Scroll to follow the birds south <span class="down"></span></p>
       <span class="progress" aria-hidden="true"></span>
     </div>
   </header>
@@ -189,15 +196,15 @@ h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height
 <p>Hybrid models that build a mechanistic description of a process into neural networks, so predictions stay physically consistent and remain interpretable.</p></div></article></div></section>
     <section id="work" class="wrap split"><h2>Selected work</h2><div class="papers"><article><span class="number" aria-hidden="true">01</span><div><h3>From weather radars to bird migration fluxes: process-guided machine learning for spatio-temporal forecasting and inference</h3>
 <p>PhD thesis, University of Amsterdam · 2025</p>
-<p>Hybrid models that combine fluid-dynamics principles with deep learning to forecast continental-scale migration, and methods to reconstruct fine-scale movement from radar. <a href="https://www.uva.nl/en/content/events/2025/06/from-weather-radars-to-bird-migration-fluxes-process-guided-machine-learning-for-spatio-temporal-forecasting-and-inference.html">Defence announcement<span aria-hidden="true"> ↗</span></a>.</p></div></article>
+<p>Hybrid models that combine fluid-dynamics principles with deep learning to forecast continental-scale migration, and methods to reconstruct fine-scale movement from radar. <a href="https://www.uva.nl/en/content/events/2025/06/from-weather-radars-to-bird-migration-fluxes-process-guided-machine-learning-for-spatio-temporal-forecasting-and-inference.html">Defence <span class="nowrap">announcement<span class="ext" aria-hidden="true"></span></span></a>.</p></div></article>
 <article><span class="number" aria-hidden="true">02</span><div><h3>Towards detailed and interpretable hybrid modeling of continental-scale bird migration</h3>
 <p>ICML AI for Science workshop · 2024</p>
-<p>An extended hybrid model that forecasts migration on arbitrary grids and at locations without radar coverage. <a href="https://openreview.net/forum?id=oAmxqO1nRy">Read the paper<span aria-hidden="true"> ↗</span></a>.</p></div></article>
+<p>An extended hybrid model that forecasts migration on arbitrary grids and at locations without radar coverage. <a href="https://openreview.net/forum?id=oAmxqO1nRy">Read the <span class="nowrap">paper<span class="ext" aria-hidden="true"></span></span></a>.</p></div></article>
 <article><span class="number" aria-hidden="true">03</span><div><h3>Learning to predict spatiotemporal movement dynamics from weather radar networks</h3>
 <p>Methods in Ecology and Evolution · 2022</p>
-<p>Introduces FluxRGNN, a recurrent graph neural network built on a mechanistic description of movement, used for 72-hour forecasts of bird migration. <a href="https://doi.org/10.1111/2041-210X.14007">Read the paper<span aria-hidden="true"> ↗</span></a> or see the <a href="https://github.com/FionaLippert">code<span aria-hidden="true"> ↗</span></a>.</p></div></article></div></section>
+<p>Introduces FluxRGNN, a recurrent graph neural network built on a mechanistic description of movement, used for 72-hour forecasts of bird migration. <a href="https://doi.org/10.1111/2041-210X.14007">Read the <span class="nowrap">paper<span class="ext" aria-hidden="true"></span></span></a> or see the <a href="https://github.com/FionaLippert"><span class="nowrap">code<span class="ext" aria-hidden="true"></span></span></a>.</p></div></article></div></section>
     <div class="night">
-      <section id="connect" class="wrap split"><h2>Get in touch</h2><div class="prose"><p>Find Fiona’s publications on <a href="https://scholar.google.com/citations?user=YOqyWTwAAAAJ">Google Scholar<span aria-hidden="true"> ↗</span></a> and her code on <a href="https://github.com/FionaLippert">GitHub<span aria-hidden="true"> ↗</span></a>.</p></div></section>
+      <section id="connect" class="wrap split"><h2>Get in touch</h2><div class="prose"><p>Find Fiona’s publications on <a href="https://scholar.google.com/citations?user=YOqyWTwAAAAJ">Google <span class="nowrap">Scholar<span class="ext" aria-hidden="true"></span></span></a> and her code on <a href="https://github.com/FionaLippert"><span class="nowrap">GitHub<span class="ext" aria-hidden="true"></span></span></a>.</p></div></section>
     </div>
   </main>
   <footer class="night"><div class="wrap foot"><span>Fiona Lippert · SRON Space Research Organisation Netherlands</span><span>Earth observation · Bird migration · Machine learning · <a href="https://aiforgood.itu.int/speaker/fiona-lippert/">Portrait via AI for Good</a> · Design by Casper van Elteren</span></div></footer>

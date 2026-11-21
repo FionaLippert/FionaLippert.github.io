@@ -37,6 +37,13 @@ h1, h2, h3 { text-wrap: balance; color: var(--ink); }
 a { color: inherit; text-decoration-color: var(--amber-dark); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
 a:hover { color: var(--amber-dark); }
 a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+/* drawn arrows (iPhones show the arrow characters as colour emoji); they take the text colour */
+.nowrap { white-space: nowrap; }
+.ext, .down { display: inline-block; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+.ext { width: .6em; height: .6em; margin-left: .24em; vertical-align: .02em;
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9 9 3M4.2 3H9v4.8'/%3E%3C/svg%3E"); }
+.down { width: .8em; height: .8em; vertical-align: -.08em;
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 1.5v9M2.5 7 6 10.5 9.5 7'/%3E%3C/svg%3E"); }
 .wrap { width: min(1120px, calc(100% - 80px)); margin-inline: auto; }
 .skip-link { position: absolute; left: 16px; top: -100px; padding: 10px 14px; background: var(--amber); color: var(--night); z-index: 10; }
 .skip-link:focus { top: 12px; }

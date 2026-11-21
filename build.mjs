@@ -10,7 +10,9 @@ const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<'
 function inline(text) {
   return escape(text).replace(/\[([^\]]+)\]\(([^\s)]+)\)/g, (_, label, url) => {
     if (!/^(https:\/\/|mailto:)/.test(url)) throw new Error('Links must use https:// or mailto:');
-    return `<a href="${url}">${label}<span aria-hidden="true"> ↗</span></a>`;
+    // keep the last word and the outbound arrow together so the arrow never wraps alone
+    const [, head = '', last] = label.match(/^(.*\s)?(\S+)$/);
+    return `<a href="${url}">${head}<span class="nowrap">${last}<span class="ext" aria-hidden="true"></span></span></a>`;
   });
 }
 function markdown(text) {
