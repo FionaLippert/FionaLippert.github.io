@@ -156,8 +156,11 @@
     W = r.width; H = r.height; dpr = d;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     if (W <= 900) {
-      // narrow screens: the text sits at the top, the globe rises from the bottom
-      R = Math.min(W * 1.1, H * 0.6); cx = W * 0.66; cy = H * 0.36 + R;
+      // narrow screens: the text sits at the top, the globe rises from the bottom,
+      // starting just below the text however tall it wraps
+      const copy = document.querySelector(".hero-copy");
+      const below = copy ? copy.getBoundingClientRect().bottom - r.top + 28 : 0;
+      R = Math.min(W * 1.1, H * 0.6); cx = W * 0.66; cy = Math.min(Math.max(H * 0.36, below), H * 0.7) + R;
     } else {
       R = Math.min(H * 0.62, W * 0.42); cx = W * 0.71; cy = H * 0.64;
     }
@@ -496,6 +499,8 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
   render(current);
+  // the web fonts can change how tall the text is, so place the globe again once they load
+  if (document.fonts) document.fonts.ready.then(() => { W = 0; layout(); render(current); });
   window.addEventListener("resize", () => {
     if (layout()) {
       if (!still) { readScroll(); current = target; }
