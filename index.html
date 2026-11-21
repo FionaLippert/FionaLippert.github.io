@@ -123,16 +123,12 @@ h2 { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height
 @media (max-width: 900px) {
   .wrap { width: calc(100% - 48px); }
   .topnav { justify-content: flex-start; flex-wrap: wrap; gap: 8px 22px; padding: 20px 24px 0; }
-  .stage::after { background: linear-gradient(180deg, #0a1626f5 0%, #0a1626dd 44%, #0a162600 64%, #0a162600 82%, #0a1626e0 100%); }
+  /* phones and narrow tablets: name, tagline and the globe only */
+  .stage::after { background: linear-gradient(180deg, #0a1626f5 0%, #0a1626d6 24%, #0a162600 42%); }
   .hero-copy { margin: 0; padding: 30px 24px 0; max-width: none; }
   .hero h1 { margin-bottom: .25em; }
-  .tagline { margin-bottom: 22px; }
-  .who { margin-bottom: 22px; }
-  .who img { width: 60px; height: 60px; }
-  .actions .btn:nth-child(3) { display: none; }
-  .legend { left: 24px; right: 24px; bottom: 18px; max-width: none; gap: 4px 18px; font-size: .76rem; }
-  .legend small { display: none; }
-  .globe-scroll .cue { display: none; }
+  .tagline { margin-bottom: 0; }
+  .who, .actions, .legend, .globe-scroll .cue { display: none; }
   main > section { padding-block: 64px; }
   .split { grid-template-columns: 1fr; row-gap: 22px; }
   h2 { font-size: 2.05rem; }

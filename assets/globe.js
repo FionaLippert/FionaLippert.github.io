@@ -155,8 +155,9 @@
     if (r.width === W && r.height === H && d === dpr) return false;
     W = r.width; H = r.height; dpr = d;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    if (W < 760) {
-      R = Math.min(W * 0.92, H * 0.5); cx = W * 0.62; cy = H * 0.6 + R * 0.92;
+    if (W <= 900) {
+      // narrow screens: the text sits at the top, the globe rises from the bottom
+      R = Math.min(W * 1.1, H * 0.6); cx = W * 0.66; cy = H * 0.36 + R;
     } else {
       R = Math.min(H * 0.62, W * 0.42); cx = W * 0.71; cy = H * 0.64;
     }
